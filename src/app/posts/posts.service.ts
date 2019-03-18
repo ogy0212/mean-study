@@ -4,6 +4,7 @@ import { map } from 'rxjs/operators';
 
 import { Post } from './post.model';
 import { HttpClient } from '@angular/common/http';
+import { log } from 'util';
 
 @Injectable({
   providedIn: 'root'
@@ -47,6 +48,13 @@ export class PostsService {
         console.log(responseData.message);
         this.posts.push(post);
         this.postsUpdated.next([...this.posts]);
+      });
+  }
+
+  deletePost(postId: string) {
+    this.http.delete(`http://localhost:3000/api/posts/${postId}`)
+      .subscribe(() => {
+        console.log(`${postId} is deleted.`);
       });
   }
 }
