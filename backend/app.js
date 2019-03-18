@@ -37,18 +37,12 @@ app.post('/api/posts', (req, res, next) => {
 })
 
 app.get('/api/posts', (req, res, next) => {
-  const posts = [{
-    id: 'aseodfij',
-    title: '1 server post title',
-    content: '1 content from server'
-  }, {
-    id: 'asdfwer',
-    title: '2 server post title',
-    content: '2 content from server'
-  }];
-  res.status(200).json({
-    message: 'it is response!',
-    posts: posts
+  Post.find().then(documents => {
+    console.log(documents);
+    res.status(200).json({
+      message: 'it is response!',
+      posts: documents
+    });
   });
 });
 
